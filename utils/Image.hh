@@ -2,7 +2,6 @@
 #define IMAGE_GUARD
 
 #include <iostream>
-#include "../lib/stb_image.h"
 
 class Image {
 private:

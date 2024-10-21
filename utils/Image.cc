@@ -73,10 +73,30 @@ Image& Image::operator=(Image&& other) noexcept {
     return *this;
 }
 
+int Image::getWidth() const
+{
+    return 0;
+}
+
+int Image::getHeight() const
+{
+    return 0;
+}
+
+int Image::getChannels() const
+{
+    return 0;
+}
+
+const unsigned char *Image::getData() const
+{
+    return nullptr;
+}
+
 // Method to clear the image data
 void Image::clear() {
     if (data) {
-        stbi_image_free(data); // Free the image data using stb_image's function
+        delete data; 
         data = nullptr;
     }
 }

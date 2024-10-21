@@ -1,11 +1,18 @@
 #ifndef IMAGE_HANDLER_GUARD
 #define IMAGE_HANDLER_GUARD
 
+
+// Include stb_image.h only once
+#ifndef STB_IMAGE_IMPLEMENTATION
 #define STB_IMAGE_IMPLEMENTATION
 #include "../lib/stb_image.h"
+#endif // STB_IMAGE_IMPLEMENTATION
 
+// Include stb_image_write.h only once
+#ifndef STB_IMAGE_WRITE_IMPLEMENTATION
 #define STB_IMAGE_WRITE_IMPLEMENTATION
 #include "../lib/stb_image_write.h"
+#endif // STB_IMAGE_WRITE_IMPLEMENTATION
 
 
 #include "Image.hh"
