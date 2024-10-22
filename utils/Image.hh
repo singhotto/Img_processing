@@ -1,19 +1,27 @@
 #ifndef IMAGE_GUARD
 #define IMAGE_GUARD
 
+#include "../lib/stb_image.h"
+#include "../lib/stb_image_write.h"
+
+#include "ImageType.hh"
+
 #include <iostream>
+#include <string>
 
 class Image {
 private:
-    unsigned char* data;
+    std::string filePath;
+    float* data;
     int width;
     int height;
     int channels;
+    ImageType imageType;
 
 public:
     // Default constructor
     Image();
-    Image(unsigned char* data, int width, int height, int channels);
+    Image(const std::string filepath, float* data, int width, int height, int channels, ImageType type);
 
     // Destructor
     ~Image();
@@ -34,10 +42,14 @@ public:
     int getWidth() const;
     int getHeight() const;
     int getChannels() const;
-    const unsigned char* getData() const;
+    float* getData() const;
+    ImageType getType() const;
+
+    float* operator()(int row, int col);
     
-    // Method to clear the image data
+    // Method to cfloate data
     void clear();
+    void displayInfo() const;
 };
 
 #endif // IMAGE_GUARD

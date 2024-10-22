@@ -1,10 +1,12 @@
 # Ignore the output and images directories
 /output/
 /images/
+/build/
 
 /output/*
 /images/*
 
+/build/*
 # Other common ignores
 *.log
 *.tmp
