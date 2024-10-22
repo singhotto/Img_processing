@@ -1,0 +1,10 @@
+# Ignore the output and images directories
+/output/
+/images/
+
+/output/*
+/images/*
+
+# Other common ignores
+*.log
+*.tmp
