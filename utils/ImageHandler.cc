@@ -44,7 +44,7 @@ ImageType getImageType(const std::string &fileName)
     }
 }
 
-unsigned char* loadTIFF(const char *filename, int &width, int &height, int &channels)
+unsigned char* loadTIFF(const char *filename, int &width, int &height, int &channels, int& bitPerChannel)
 {
     TIFF *tiff = TIFFOpen(filename, "r");
     if (!tiff)
@@ -61,6 +61,7 @@ unsigned char* loadTIFF(const char *filename, int &width, int &height, int &chan
     uint16 samplesPerPixel;
     TIFFGetField(tiff, TIFFTAG_SAMPLESPERPIXEL, &samplesPerPixel);
 
+    bitPerChannel = bitsPerSample;
     channels = samplesPerPixel;
 
     // Allocate memory for image data (width * height * channels)
@@ -99,7 +100,7 @@ unsigned char* loadTIFF(const char *filename, int &width, int &height, int &chan
     return data;
 }
 
-bool saveTIFF(const char *filename, unsigned char* data, int width, int height, int channels)
+bool saveTIFF(const char *filename, unsigned char* data, int width, int height, int channels, int bitsPerSample)
 {
     if (data == nullptr)
     {
@@ -117,7 +118,7 @@ bool saveTIFF(const char *filename, unsigned char* data, int width, int height, 
     TIFFSetField(tiff, TIFFTAG_IMAGEWIDTH, width);
     TIFFSetField(tiff, TIFFTAG_IMAGELENGTH, height);
     TIFFSetField(tiff, TIFFTAG_SAMPLESPERPIXEL, channels);
-    TIFFSetField(tiff, TIFFTAG_BITSPERSAMPLE, channels); // Assume 8 bits per channel
+    TIFFSetField(tiff, TIFFTAG_BITSPERSAMPLE, bitsPerSample); // Assume 8 bits per channel
     TIFFSetField(tiff, TIFFTAG_ORIENTATION, ORIENTATION_TOPLEFT);
     TIFFSetField(tiff, TIFFTAG_PLANARCONFIG, PLANARCONFIG_CONTIG);
 
@@ -176,6 +177,7 @@ Image ImageHandler::loadImage(const std::string &filename)
     int channels;
     ImageType type;
     unsigned char *data;
+    int bitPerChannel = 8;
     std::ifstream file(filename.c_str());
 
     if (file.is_open())
@@ -194,7 +196,7 @@ Image ImageHandler::loadImage(const std::string &filename)
 
     if (type == ImageType::TIFF)
     {
-        data = loadTIFF(filename.c_str(), width, height, channels);
+        data = loadTIFF(filename.c_str(), width, height, channels, bitPerChannel);
     }
     else
     {
@@ -207,7 +209,7 @@ Image ImageHandler::loadImage(const std::string &filename)
     copy2float(data, size, fdata);
     delete[] data;
 
-    return Image(filename, fdata, width, height, channels, type);
+    return Image(filename, fdata, width, height, channels, type, bitPerChannel);
 }
 
 // Save the Image object to a file
@@ -217,8 +219,6 @@ void ImageHandler::saveImage(const std::string &filename, Image &image)
     {
         throw std::runtime_error("No image data to save."); // Throw exception if no image data is present
     }
-
-    image.displayInfo();
 
     ImageType type = image.getType();
 
@@ -261,7 +261,7 @@ void ImageHandler::saveImage(const std::string &filename, Image &image)
     }
     else if (type == ImageType::TIFF)
     {
-        saveTIFF(filename.c_str(), data, image.getWidth(), image.getHeight(), image.getChannels());
+        saveTIFF(filename.c_str(), data, image.getWidth(), image.getHeight(), image.getChannels(), image.getBPC());
     }
     else
     {

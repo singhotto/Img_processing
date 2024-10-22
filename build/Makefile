@@ -249,6 +249,30 @@ utils/ImageHandler.cc.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/utils/ImageHandler.cc.s
 .PHONY : utils/ImageHandler.cc.s
 
+utils/ImageProcessor.o: utils/ImageProcessor.cc.o
+.PHONY : utils/ImageProcessor.o
+
+# target to build an object file
+utils/ImageProcessor.cc.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/utils/ImageProcessor.cc.o
+.PHONY : utils/ImageProcessor.cc.o
+
+utils/ImageProcessor.i: utils/ImageProcessor.cc.i
+.PHONY : utils/ImageProcessor.i
+
+# target to preprocess a source file
+utils/ImageProcessor.cc.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/utils/ImageProcessor.cc.i
+.PHONY : utils/ImageProcessor.cc.i
+
+utils/ImageProcessor.s: utils/ImageProcessor.cc.s
+.PHONY : utils/ImageProcessor.s
+
+# target to generate assembly for a file
+utils/ImageProcessor.cc.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/utils/ImageProcessor.cc.s
+.PHONY : utils/ImageProcessor.cc.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -273,6 +297,9 @@ help:
 	@echo "... utils/ImageHandler.o"
 	@echo "... utils/ImageHandler.i"
 	@echo "... utils/ImageHandler.s"
+	@echo "... utils/ImageProcessor.o"
+	@echo "... utils/ImageProcessor.i"
+	@echo "... utils/ImageProcessor.s"
 .PHONY : help
 
 

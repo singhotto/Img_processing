@@ -16,12 +16,13 @@ private:
     int width;
     int height;
     int channels;
+    int bitPerChannel;
     ImageType imageType;
 
 public:
     // Default constructor
     Image();
-    Image(const std::string filepath, float* data, int width, int height, int channels, ImageType type);
+    Image(const std::string filepath, float* data, int width, int height, int channels, ImageType type, int bitsPerChannel);
 
     // Destructor
     ~Image();
@@ -44,6 +45,7 @@ public:
     int getChannels() const;
     float* getData() const;
     ImageType getType() const;
+    int getBPC() const;
 
     float* operator()(int row, int col);
     

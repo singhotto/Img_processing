@@ -111,10 +111,24 @@ CMakeFiles/main.dir/utils/ImageHandler.cc.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/main.dir/utils/ImageHandler.cc.s"
 	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/singhotto/Documents/ImgProcessing/img_processing/utils/ImageHandler.cc -o CMakeFiles/main.dir/utils/ImageHandler.cc.s
 
+CMakeFiles/main.dir/utils/ImageProcessor.cc.o: CMakeFiles/main.dir/flags.make
+CMakeFiles/main.dir/utils/ImageProcessor.cc.o: /Users/singhotto/Documents/ImgProcessing/img_processing/utils/ImageProcessor.cc
+CMakeFiles/main.dir/utils/ImageProcessor.cc.o: CMakeFiles/main.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/singhotto/Documents/ImgProcessing/img_processing/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/main.dir/utils/ImageProcessor.cc.o"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/main.dir/utils/ImageProcessor.cc.o -MF CMakeFiles/main.dir/utils/ImageProcessor.cc.o.d -o CMakeFiles/main.dir/utils/ImageProcessor.cc.o -c /Users/singhotto/Documents/ImgProcessing/img_processing/utils/ImageProcessor.cc
+
+CMakeFiles/main.dir/utils/ImageProcessor.cc.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/main.dir/utils/ImageProcessor.cc.i"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/singhotto/Documents/ImgProcessing/img_processing/utils/ImageProcessor.cc > CMakeFiles/main.dir/utils/ImageProcessor.cc.i
+
+CMakeFiles/main.dir/utils/ImageProcessor.cc.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/main.dir/utils/ImageProcessor.cc.s"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/singhotto/Documents/ImgProcessing/img_processing/utils/ImageProcessor.cc -o CMakeFiles/main.dir/utils/ImageProcessor.cc.s
+
 CMakeFiles/main.dir/lib/stb_image.cc.o: CMakeFiles/main.dir/flags.make
 CMakeFiles/main.dir/lib/stb_image.cc.o: /Users/singhotto/Documents/ImgProcessing/img_processing/lib/stb_image.cc
 CMakeFiles/main.dir/lib/stb_image.cc.o: CMakeFiles/main.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/singhotto/Documents/ImgProcessing/img_processing/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/main.dir/lib/stb_image.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/singhotto/Documents/ImgProcessing/img_processing/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/main.dir/lib/stb_image.cc.o"
 	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/main.dir/lib/stb_image.cc.o -MF CMakeFiles/main.dir/lib/stb_image.cc.o.d -o CMakeFiles/main.dir/lib/stb_image.cc.o -c /Users/singhotto/Documents/ImgProcessing/img_processing/lib/stb_image.cc
 
 CMakeFiles/main.dir/lib/stb_image.cc.i: cmake_force
@@ -128,7 +142,7 @@ CMakeFiles/main.dir/lib/stb_image.cc.s: cmake_force
 CMakeFiles/main.dir/lib/stb_image_write.cc.o: CMakeFiles/main.dir/flags.make
 CMakeFiles/main.dir/lib/stb_image_write.cc.o: /Users/singhotto/Documents/ImgProcessing/img_processing/lib/stb_image_write.cc
 CMakeFiles/main.dir/lib/stb_image_write.cc.o: CMakeFiles/main.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/singhotto/Documents/ImgProcessing/img_processing/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/main.dir/lib/stb_image_write.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/singhotto/Documents/ImgProcessing/img_processing/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/main.dir/lib/stb_image_write.cc.o"
 	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/main.dir/lib/stb_image_write.cc.o -MF CMakeFiles/main.dir/lib/stb_image_write.cc.o.d -o CMakeFiles/main.dir/lib/stb_image_write.cc.o -c /Users/singhotto/Documents/ImgProcessing/img_processing/lib/stb_image_write.cc
 
 CMakeFiles/main.dir/lib/stb_image_write.cc.i: cmake_force
@@ -144,6 +158,7 @@ main_OBJECTS = \
 "CMakeFiles/main.dir/main.cpp.o" \
 "CMakeFiles/main.dir/utils/Image.cc.o" \
 "CMakeFiles/main.dir/utils/ImageHandler.cc.o" \
+"CMakeFiles/main.dir/utils/ImageProcessor.cc.o" \
 "CMakeFiles/main.dir/lib/stb_image.cc.o" \
 "CMakeFiles/main.dir/lib/stb_image_write.cc.o"
 
@@ -153,12 +168,13 @@ main_EXTERNAL_OBJECTS =
 main: CMakeFiles/main.dir/main.cpp.o
 main: CMakeFiles/main.dir/utils/Image.cc.o
 main: CMakeFiles/main.dir/utils/ImageHandler.cc.o
+main: CMakeFiles/main.dir/utils/ImageProcessor.cc.o
 main: CMakeFiles/main.dir/lib/stb_image.cc.o
 main: CMakeFiles/main.dir/lib/stb_image_write.cc.o
 main: CMakeFiles/main.dir/build.make
 main: /opt/homebrew/lib/libtiff.dylib
 main: CMakeFiles/main.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/Users/singhotto/Documents/ImgProcessing/img_processing/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Linking CXX executable main"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/Users/singhotto/Documents/ImgProcessing/img_processing/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Linking CXX executable main"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/main.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

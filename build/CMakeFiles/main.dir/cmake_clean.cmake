@@ -9,6 +9,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/main.dir/utils/Image.cc.o.d"
   "CMakeFiles/main.dir/utils/ImageHandler.cc.o"
   "CMakeFiles/main.dir/utils/ImageHandler.cc.o.d"
+  "CMakeFiles/main.dir/utils/ImageProcessor.cc.o"
+  "CMakeFiles/main.dir/utils/ImageProcessor.cc.o.d"
   "main"
   "main.pdb"
 )

@@ -1,11 +1,11 @@
 #include "Image.hh"
 
 // Default constructor
-Image::Image() : data(nullptr), width(0), height(0), channels(0) {}
+Image::Image() : filePath(""), data(nullptr), width(0), height(0), channels(0), bitPerChannel(8), imageType(ImageType::UNKNOWN) {}
 
 // Parameterized constructor for initializing with existing data
-Image::Image(const std::string filepath, float *data, int width, int height, int channels, ImageType type)
-    : filePath(filepath), data(nullptr), width(width), height(height), channels(channels), imageType(type)
+Image::Image(const std::string filepath, float *data, int width, int height, int channels, ImageType type, int bitPC = 8)
+    : filePath(filepath), data(nullptr), width(width), height(height), channels(channels), bitPerChannel(bitPC), imageType(type)
 {
     // Allocate memory for the image data
     if (data == nullptr)
@@ -111,6 +111,11 @@ float *Image::getData() const
 ImageType Image::getType() const
 {
     return imageType;
+}
+
+int Image::getBPC() const
+{
+    return bitPerChannel;
 }
 
 float *Image::operator()(int row, int col)
