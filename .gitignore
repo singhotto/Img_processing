@@ -2,9 +2,11 @@
 /output/
 /images/
 /build/
+/histogram/
 
 /output/*
 /images/*
+/histogram/*
 
 /build/*
 # Other common ignores
