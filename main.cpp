@@ -5,19 +5,23 @@
 #include "utils/ImageProcessor.hh"
 
 int main(){
-    const std::string fileName = "big_color.png";
-    Image img = ImageHandler::getInstance().loadImage("../images/" + fileName);
-    // int size = img.getHeight() * img.getWidth() * img.getChannels();
-    // for(int i = 0; i<size/4; i++){
-    //     float& data = img.getData()[i];
-    //     if(data > 0){
-    //         std::cout<<(int)data<<"\n";
+    const std::string fileName = "1922_digital_image.tiff";
+    // const std::string fileName = "big_color.png";
+    ImageHandler& handler = ImageHandler::getInstance();
+    ImageProcessor& processor = ImageProcessor::getInstance();
 
-    //     }
-    // }
-    Image newImage = ImageProcessor::getInstance().rgb2Color(img);
-    // Image newImg("tt.jpg", newData, img.getWidth(), img.getHeight(), img.getChannels(), ImageType::JPEG);
-    ImageHandler::getInstance().saveImage("../output/" + fileName, newImage);
+    //original Image
+    Image img = handler.loadImage("../images/" + fileName);
+
+    //image to work
+    // Image newImage = processor.toBinary(img);
+    // Image newImage = processor.changeBrightness(img, -100);
+    // Image newImage = processor.rgb2Grayscale(img);
+    processor.generateHistogram(img);
+
+    
+    //Saving Image
+    // handler.saveImage("../output/" + fileName, newImage);
 
     return 0;
 }

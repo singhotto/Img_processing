@@ -201,6 +201,30 @@ main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/main.cpp.s
 .PHONY : main.cpp.s
 
+utils/ChartGenerator/Chart.o: utils/ChartGenerator/Chart.cc.o
+.PHONY : utils/ChartGenerator/Chart.o
+
+# target to build an object file
+utils/ChartGenerator/Chart.cc.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/utils/ChartGenerator/Chart.cc.o
+.PHONY : utils/ChartGenerator/Chart.cc.o
+
+utils/ChartGenerator/Chart.i: utils/ChartGenerator/Chart.cc.i
+.PHONY : utils/ChartGenerator/Chart.i
+
+# target to preprocess a source file
+utils/ChartGenerator/Chart.cc.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/utils/ChartGenerator/Chart.cc.i
+.PHONY : utils/ChartGenerator/Chart.cc.i
+
+utils/ChartGenerator/Chart.s: utils/ChartGenerator/Chart.cc.s
+.PHONY : utils/ChartGenerator/Chart.s
+
+# target to generate assembly for a file
+utils/ChartGenerator/Chart.cc.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/utils/ChartGenerator/Chart.cc.s
+.PHONY : utils/ChartGenerator/Chart.cc.s
+
 utils/Image.o: utils/Image.cc.o
 .PHONY : utils/Image.o
 
@@ -291,6 +315,9 @@ help:
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
+	@echo "... utils/ChartGenerator/Chart.o"
+	@echo "... utils/ChartGenerator/Chart.i"
+	@echo "... utils/ChartGenerator/Chart.s"
 	@echo "... utils/Image.o"
 	@echo "... utils/Image.i"
 	@echo "... utils/Image.s"

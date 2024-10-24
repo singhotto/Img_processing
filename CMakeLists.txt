@@ -19,6 +19,7 @@ set(SRCS
     utils/ImageProcessor.cc
     lib/stb_image.cc
     lib/stb_image_write.cc
+    utils/ChartGenerator/Chart.cc
 )
 
 # Header files (optional, for IDEs and documentation)
@@ -26,6 +27,9 @@ set(HEADERS
     utils/Image.hh
     utils/ImageHandler.hh
     utils/ImageProcessor.hh
+    utils/ChartGenerator/BMPHeader.hh
+    utils/ChartGenerator/Font.hh
+    utils/ChartGenerator/Chart.hh
     lib/stb_image.h
     lib/stb_image_write.h
 )

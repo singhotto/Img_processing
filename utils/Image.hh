@@ -46,6 +46,7 @@ public:
     float* getData() const;
     ImageType getType() const;
     int getBPC() const;
+    std::string getName() const;
 
     float* operator()(int row, int col);
     

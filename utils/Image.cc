@@ -23,7 +23,7 @@ Image::~Image()
 
 // Copy constructor
 Image::Image(const Image &other)
-    : width(other.width), height(other.height), channels(other.channels)
+    : filePath(other.getName()), width(other.width), height(other.height), channels(other.channels), bitPerChannel(other.getBPC()), imageType(other.getType())
 {
     if (other.data)
     {
@@ -43,9 +43,12 @@ Image &Image::operator=(const Image &other)
     {            // Check for self-assignment
         clear(); // Free existing resources
 
+        filePath = other.getName(), 
         width = other.width;
         height = other.height;
         channels = other.channels;
+        bitPerChannel = other.getBPC();
+        imageType = other.getType();
 
         if (other.data)
         {
@@ -62,7 +65,7 @@ Image &Image::operator=(const Image &other)
 
 // Move constructor
 Image::Image(Image &&other) noexcept
-    : data(other.data), width(other.width), height(other.height), channels(other.channels)
+    : filePath(other.getName()), data(other.data), width(other.width), height(other.height), channels(other.channels), bitPerChannel(other.getBPC()), imageType(other.getType())
 {
     other.data = nullptr; // Leave the moved-from object in a valid state
     other.width = other.height = other.channels = 0;
@@ -80,6 +83,9 @@ Image &Image::operator=(Image &&other) noexcept
         width = other.width;
         height = other.height;
         channels = other.channels;
+        filePath = other.getName(), 
+        bitPerChannel = other.getBPC();
+        imageType = other.getType();
 
         // Leave the moved-from object in a valid state
         other.data = nullptr;
@@ -116,6 +122,11 @@ ImageType Image::getType() const
 int Image::getBPC() const
 {
     return bitPerChannel;
+}
+
+std::string Image::getName() const
+{
+    return filePath;
 }
 
 float *Image::operator()(int row, int col)

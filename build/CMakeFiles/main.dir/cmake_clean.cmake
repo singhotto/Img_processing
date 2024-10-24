@@ -5,6 +5,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/main.dir/lib/stb_image_write.cc.o.d"
   "CMakeFiles/main.dir/main.cpp.o"
   "CMakeFiles/main.dir/main.cpp.o.d"
+  "CMakeFiles/main.dir/utils/ChartGenerator/Chart.cc.o"
+  "CMakeFiles/main.dir/utils/ChartGenerator/Chart.cc.o.d"
   "CMakeFiles/main.dir/utils/Image.cc.o"
   "CMakeFiles/main.dir/utils/Image.cc.o.d"
   "CMakeFiles/main.dir/utils/ImageHandler.cc.o"
