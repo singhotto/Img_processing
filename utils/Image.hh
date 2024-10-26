@@ -22,7 +22,8 @@ private:
 public:
     // Default constructor
     Image();
-    Image(const std::string filepath, float* data, int width, int height, int channels, ImageType type, int bitsPerChannel);
+    Image(const std::string filepath, int width, int height, int channels, ImageType type, int bitsPerChannel = 8);
+    Image(const std::string filepath, float* data, int width, int height, int channels, ImageType type, int bitsPerChannel = 8);
 
     // Destructor
     ~Image();
@@ -47,8 +48,10 @@ public:
     ImageType getType() const;
     int getBPC() const;
     std::string getName() const;
+    int getDataSize() const;
 
-    float* operator()(int row, int col);
+    const float operator()(int row, int col) const;
+    float& operator()(int row, int col);
     
     // Method to cfloate data
     void clear();

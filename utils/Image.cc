@@ -3,8 +3,14 @@
 // Default constructor
 Image::Image() : filePath(""), data(nullptr), width(0), height(0), channels(0), bitPerChannel(8), imageType(ImageType::UNKNOWN) {}
 
+Image::Image(const std::string filepath, int width, int height, int channels, ImageType type, int bitsPerChannel)
+    : filePath(filepath), data(nullptr), width(width), height(height), channels(channels), bitPerChannel(bitsPerChannel), imageType(type)
+{
+    this->data = new float[width * height * channels];
+}
+
 // Parameterized constructor for initializing with existing data
-Image::Image(const std::string filepath, float *data, int width, int height, int channels, ImageType type, int bitPC = 8)
+Image::Image(const std::string filepath, float *data, int width, int height, int channels, ImageType type, int bitPC)
     : filePath(filepath), data(nullptr), width(width), height(height), channels(channels), bitPerChannel(bitPC), imageType(type)
 {
     // Allocate memory for the image data
@@ -129,7 +135,12 @@ std::string Image::getName() const
     return filePath;
 }
 
-float *Image::operator()(int row, int col)
+int Image::getDataSize() const
+{
+    return width * height * channels;
+}
+
+const float Image::operator()(int row, int col) const
 {
     // Check bounds
     if (row < 0 || row >= height || col < 0 || col >= width)
@@ -138,7 +149,18 @@ float *Image::operator()(int row, int col)
     }
     // Calculate the index in the 1D vector
     int pointer = (row * width + col) * channels; // Adjust based on the number of channels
-    return data + pointer; 
+    return data[pointer]; 
+}
+float &Image::operator()(int row, int col)
+{
+    // Check bounds
+    if (row < 0 || row >= height || col < 0 || col >= width)
+    {
+        throw std::out_of_range("Index out of bounds");
+    }
+    // Calculate the index in the 1D vector
+    int pointer = (row * width + col) * channels; // Adjust based on the number of channels
+    return data[pointer]; 
 }
 // Method to clear the image data
 void Image::clear()
