@@ -10,6 +10,12 @@ void swap(int &a, int &b)
     b = c;
 }
 
+void swap(float& a, float& b){
+    float c = a;
+    a = b;
+    b = c;
+}
+
 std::vector<float> ImageProcessor::getHistogram(const Image &img)
 {
     std::vector<float> hist(256, 0);
@@ -29,7 +35,7 @@ std::vector<float> ImageProcessor::getHistogram(const Image &img)
     return hist;
 }
 
-Image ImageProcessor::rotateImage(const Image &img, char x)
+void ImageProcessor::rotateImage(Image &img, char x)
 {
     int originalH = img.getHeight();
     int originalW = img.getWidth();
@@ -72,7 +78,7 @@ Image ImageProcessor::rotateImage(const Image &img, char x)
             int newRowPointer = i * width;
             for (int j = 0; j < width; j++)
             {
-                int pointerOld = (j * originalW + i) * cnls;
+                int pointerOld = (j * originalW + originalH - i - 1) * cnls;
                 int pointerNew = (newRowPointer + j) * cnls;
 
                 for (int k = 0; k < cnls; k++)
@@ -91,7 +97,7 @@ Image ImageProcessor::rotateImage(const Image &img, char x)
             int newRowPointer = i * width;
             for (int j = 0; j < width; j++)
             {
-                int pointerOld = (oldRowPointer + j) * cnls;
+                int pointerOld = (oldRowPointer + originalW- j -1) * cnls;
                 int pointerNew = (newRowPointer + j) * cnls;
 
                 for (int k = 0; k < cnls; k++)
@@ -102,7 +108,53 @@ Image ImageProcessor::rotateImage(const Image &img, char x)
         }
     }
 
-    return newImage;
+    img = newImage;
+}
+
+void ImageProcessor::mirror(Image &img, char x)
+{
+    int width = img.getWidth();
+    int height = img.getHeight();
+    int cnls = img.getChannels();
+    float *data = img.getData();
+
+    if (x == 'x')
+    {
+        for (int i = 0; i < height/2; i++)
+        {
+            int pointerRA = i * width;
+            int pointerRB = (height - i - 1) * width;
+            for (int j = 0; j < width; j++)
+            {
+                int pointerA = (pointerRA + j) * cnls;
+                int pointerB = (pointerRB + j) * cnls;
+
+                for (int k = 0; k < cnls; k++)
+                {
+                    swap(data[pointerA], data[pointerB]);
+                }
+            }
+        }
+    }
+
+    if (x == 'y')
+    {
+        for (int i = 0; i < height; i++)
+        {
+            int pointerRA = i * width;
+            int pointerRB = pointerRA + width; 
+            for (int j = 0; j < width/2; j++)
+            {
+
+                int pointerA = (pointerRA + j) * cnls;
+                int pointerB = (pointerRB + width - j - 1) * cnls;
+                for (int k = 0; k < cnls; k++)
+                {
+                    swap(data[pointerA + k], data[pointerB+k]);
+                }
+            }
+        }
+    }
 }
 
 float min(float a, float b)
@@ -125,7 +177,7 @@ ImageProcessor &ImageProcessor::getInstance()
     return instance;
 }
 
-Image ImageProcessor::rgb2Grayscale(const Image &image)
+void ImageProcessor::rgb2Grayscale(Image &image)
 {
     int channels = image.getChannels();
     if (channels < 3)
@@ -134,44 +186,36 @@ Image ImageProcessor::rgb2Grayscale(const Image &image)
     int alpha = image.getData()[4];
     int size = image.getWidth() * image.getHeight();
 
-    Image tempImage = image;
-
-    float *oldData = image.getData();
-    float *newdata = tempImage.getData();
+    float *data = image.getData();
 
     for (int i = 0; i < size; i++)
     {
         int idx1 = i * channels;
         int idx2 = i * channels + 1;
         int idx3 = i * channels + 2;
-        float temp = oldData[idx1] * 0.299f + oldData[idx2] * 0.587f + oldData[idx3] * 0.114f;
-        newdata[idx1] = temp;
-        newdata[idx2] = temp;
-        newdata[idx3] = temp;
+        float temp = data[idx1] * 0.299f + data[idx2] * 0.587f + data[idx3] * 0.114f;
+        data[idx1] = temp;
+        data[idx2] = temp;
+        data[idx3] = temp;
         if (channels == 4)
         {
-            newdata[i * channels + 3] = alpha;
+            data[i * channels + 3] = alpha;
         }
     }
-
-    return tempImage;
 }
 
-Image ImageProcessor::toBinary(const Image &image, int threshold)
+void ImageProcessor::toBinary(Image &image, int threshold)
 {
     int channels = image.getChannels();
     int size = image.getWidth() * image.getHeight();
 
-    Image tempImage = image;
-
-    float *oldData = image.getData();
-    float *newdata = tempImage.getData();
+    float *data = image.getData();
 
     if (channels < 3)
     {
         for (int i = 0; i < size; i++)
         {
-            newdata[i] = oldData[i] > threshold ? WHITE : BLACK;
+            data[i] = data[i] > threshold ? WHITE : BLACK;
         }
     }
     else
@@ -183,40 +227,35 @@ Image ImageProcessor::toBinary(const Image &image, int threshold)
             int idx1 = i * channels;
             int idx2 = i * channels + 1;
             int idx3 = i * channels + 2;
-            float temp = oldData[idx1] * 0.299f + oldData[idx2] * 0.587f + oldData[idx3] * 0.114f;
+            float temp = data[idx1] * 0.299f + data[idx2] * 0.587f + data[idx3] * 0.114f;
             temp = temp > threshold ? WHITE : BLACK;
-            newdata[idx1] = temp;
-            newdata[idx2] = temp;
-            newdata[idx3] = temp;
+            data[idx1] = temp;
+            data[idx2] = temp;
+            data[idx3] = temp;
             if (channels == 4)
             {
-                newdata[i * channels + 3] = alpha;
+                data[i * channels + 3] = alpha;
             }
         }
     }
-
-    return tempImage;
 }
 
-Image ImageProcessor::changeBrightness(const Image &image, int threshold)
+void ImageProcessor::changeBrightness(Image &image, int threshold)
 {
     int channels = image.getChannels();
     int size = image.getWidth() * image.getHeight();
 
-    Image tempImage = image;
-
-    float *oldData = image.getData();
-    float *newdata = tempImage.getData();
+    float *data = image.getData();
 
     if (channels < 3)
     {
         for (int i = 0; i < size; i++)
         {
-            newdata[i] = oldData[i] + threshold;
-            if (newdata[i] > WHITE)
-                newdata[i] = WHITE;
-            if (newdata[i] < BLACK)
-                newdata[i] = BLACK;
+            data[i] = data[i] + threshold;
+            if (data[i] > WHITE)
+                data[i] = WHITE;
+            if (data[i] < BLACK)
+                data[i] = BLACK;
         }
     }
     else
@@ -227,25 +266,21 @@ Image ImageProcessor::changeBrightness(const Image &image, int threshold)
             int idx2 = i * channels + 1;
             int idx3 = i * channels + 2;
 
-            newdata[idx1] = min(WHITE, max(BLACK, oldData[idx1] + threshold));
-            newdata[idx2] = min(WHITE, max(BLACK, oldData[idx2] + threshold));
-            newdata[idx3] = min(WHITE, max(BLACK, oldData[idx3] + threshold));
+            data[idx1] = min(WHITE, max(BLACK, data[idx1] + threshold));
+            data[idx2] = min(WHITE, max(BLACK, data[idx2] + threshold));
+            data[idx3] = min(WHITE, max(BLACK, data[idx3] + threshold));
         }
     }
-
-    return tempImage;
 }
 
-Image ImageProcessor::histEqualization(const Image &image)
+void ImageProcessor::histEqualization(Image &image)
 {
     std::vector<float> hist = getHistogram(image);
     std::vector<int> histEq(256, 0);
 
-    Image newImage = image;
     float sum = 0.0f;
     int size = image.getChannels() * image.getHeight() * image.getWidth();
     float *data = image.getData();
-    float *newData = newImage.getData();
 
     for (int i = 0; i < 256; i++)
     {
@@ -255,32 +290,28 @@ Image ImageProcessor::histEqualization(const Image &image)
 
     for (int i = 0; i < size; i++)
     {
-        newData[i] = histEq[(int)data[i]];
+        data[i] = histEq[(int)data[i]];
     }
-
-    return newImage;
 }
 
-Image ImageProcessor::rotateLeft(const Image &image)
+void ImageProcessor::rotateLeft(Image &image)
 {
-    return rotateImage(image, 'l');
+    rotateImage(image, 'l');
 }
 
-Image ImageProcessor::rotateRight(const Image &image)
+void ImageProcessor::rotateRight(Image &image)
 {
-    return rotateImage(image, 'r');
+    rotateImage(image, 'r');
 }
 
-Image ImageProcessor::rotateDown(const Image &image)
+void ImageProcessor::rotateDown(Image &image)
 {
-    return rotateImage(image, 'd');
+    rotateImage(image, 'd');
 }
 
-Image ImageProcessor::negativeImage(const Image &image)
+void ImageProcessor::negativeImage(Image &image)
 {
-    Image newImage = image;
-    float *originData = image.getData();
-    float *newData = newImage.getData();
+    float *data = image.getData();
     int height = image.getHeight();
     int width = image.getWidth();
     int cnls = image.getChannels();
@@ -295,12 +326,20 @@ Image ImageProcessor::negativeImage(const Image &image)
 
             for (int k = 0; k < work_cnls; k++)
             {
-                newData[pointer + k] = 255.0f - originData[pointer + k];
+                data[pointer + k] = 255.0f - data[pointer + k];
             }
         }
     }
+}
 
-    return newImage;
+void ImageProcessor::mirrorX(Image &image)
+{
+    mirror(image, 'x');
+}
+
+void ImageProcessor::mirrorY(Image &image)
+{
+    mirror(image, 'y');
 }
 
 void ImageProcessor::generateHistogram(const Image &image)

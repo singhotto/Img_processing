@@ -18,19 +18,26 @@ private:
     ImageProcessor& operator=(const ImageProcessor&) = delete;
 
     std::vector<float> getHistogram(const Image& img);
-    Image rotateImage(const Image& img, char x);
+    void rotateImage(Image& img, char x);
+
+    void mirror(Image& img, char x);
 public:
     // Static method to access the singleton instance
     static ImageProcessor& getInstance();
 
-    Image rgb2Grayscale(const Image& image);
-    Image toBinary(const Image& image, int threshold = 150);
-    Image changeBrightness(const Image& image, int threshold);
-    Image histEqualization(const Image& image);
-    Image rotateLeft(const Image& image);
-    Image rotateRight(const Image& image);
-    Image rotateDown(const Image& image);
-    Image negativeImage(const Image& image);
+    void rgb2Grayscale(Image& image);
+    void toBinary(Image& image, int threshold = 150);
+    void changeBrightness(Image& image, int threshold);
+    void histEqualization(Image& image);
+    
+    void rotateLeft(Image& image);
+    void rotateRight(Image& image);
+    void rotateDown(Image& image);
+
+    void negativeImage(Image& image);
+
+    void mirrorX(Image& image);
+    void mirrorY(Image& image);
 
     //save historgram
     void generateHistogram(const Image& image);

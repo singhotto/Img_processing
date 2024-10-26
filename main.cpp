@@ -5,7 +5,7 @@
 #include "utils/ImageProcessor.hh"
 
 int main(){
-    const std::string fileName = "ultrasound-fetus2.tiff";
+    const std::string fileName = "cameraman.jpg";
     // const std::string fileName = "big_color.png";
     ImageHandler& handler = ImageHandler::getInstance();
     ImageProcessor& processor = ImageProcessor::getInstance();
@@ -14,22 +14,28 @@ int main(){
     Image img = handler.loadImage("../images/" + fileName);
 
     //image to work
-    // processor.generateHistogram(img);
-    // Image newImage = processor.toBinary(img);
-    // Image newImage = processor.changeBrightness(img, -100);
-    // Image newImage = processor.rgb2Grayscale(img);
+    // processor.rgb2Grayscale(img);
+    // processor.toBinary(img);
+    // processor.changeBrightness(img, -100);
+
+    // processor.histEqualization(img);
+
+    // processor.rotateLeft(img);
+    // processor.rotateRight(img);
+    // processor.rotateDown(img);
+
+    // processor.mirrorX(img);
+    // processor.mirrorY(img);
     
-    Image newImage = processor.negativeImage(img);
-
-    // Image newImage = processor.rotateDown(img);
+    // processor.negativeImage(img);
 
     // processor.generateHistogram(img);
-    // Image newImage = processor.histEqualization(img);
+    // processor.generateHistogram(img);
     // processor.generateHistogram(newImage);
 
     
     //Saving Image
-    handler.saveImage("../output/" + fileName, newImage);
+    handler.saveImage("../output/" + fileName, img);
 
     return 0;
 }
