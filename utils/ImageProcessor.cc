@@ -478,6 +478,31 @@ void ImageProcessor::gaussianSmoothing(Image &image, int sigma)
     delete[] kernel;
 }
 
+void ImageProcessor::addSaltPepper(Image &image, float ratio)
+{
+    if(ratio > 1.0f){
+        ratio = 1.0f;
+    }
+    int height = image.getHeight();
+    int width = image.getWidth();
+    float* data = image.getData();
+    int cnls = image.getChannels();
+    int work_cnls = cnls < 4?cnls:3;
+    int noisyPixels = ratio * height * width;
+    srand(static_cast<unsigned>(time(0)));
+
+    for(int i = 0; i<noisyPixels; i++){
+        int y = rand() % height;
+        int x = rand() % width;
+        bool salt = rand() % 2;
+        int pointer = (y * width + x) * cnls;
+
+        for(int j = 0;j<work_cnls; j++){
+            data[pointer + j] = salt?WHITE:BLACK;
+        }
+    }
+}
+
 void ImageProcessor::generateHistogram(const Image &image)
 {
     std::vector<float> hist = getHistogram(image);

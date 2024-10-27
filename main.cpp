@@ -5,8 +5,8 @@
 #include "utils/ImageProcessor.hh"
 
 int main(){
-    // const std::string fileName = "cameraman.jpg";
-    const std::string fileName = "lena_noisy.png";
+    const std::string fileName = "cameraman.jpg";
+    // const std::string fileName = "lena_noisy.png";
     // const std::string fileName = "bottels.png";
     // const std::string fileName = "cnls4.jpg";
     ImageHandler& handler = ImageHandler::getInstance();
@@ -34,12 +34,12 @@ int main(){
     // processor.negativeImage(img);
 
     // processor.generateHistogram(img);
-    // processor.generateHistogram(img);
-    // processor.generateHistogram(newImage);
 
-    processor.medianFilter(img, 5);
+    // processor.medianFilter(img, 5);
     // processor.gaussianSmoothing(img, 3);
     
+    // processor.addSaltPepper(img, 0.1f);
+
     //Saving Image
     handler.saveImage("../output/" + fileName, img);
 

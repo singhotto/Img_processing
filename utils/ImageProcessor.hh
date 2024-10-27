@@ -8,6 +8,8 @@
 #include <stdexcept> 
 #include <cmath>
 #include <algorithm>
+#include <cstdlib> 
+#include <ctime> 
 
 class ImageProcessor
 {
@@ -43,6 +45,8 @@ public:
 
     void medianFilter(Image& image, int sigma);
     void gaussianSmoothing(Image& image, int sigma);
+
+    void addSaltPepper(Image& image, float ratio);
 
     //save historgram
     void generateHistogram(const Image& image);
