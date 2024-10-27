@@ -10,10 +10,80 @@ void swap(int &a, int &b)
     b = c;
 }
 
-void swap(float& a, float& b){
+void swap(float &a, float &b)
+{
     float c = a;
     a = b;
     b = c;
+}
+
+float gauss(float x, float y, int sigma)
+{
+    int sigma2 = sigma * sigma;
+
+    return (1 / (2 * M_PI * sigma2)) * exp(-(x * x + y * y) / (2 * sigma2));
+}
+
+void calculateKernel(float *kernel, int size, int sigma)
+{
+    int center = size / 2;
+    float sum = 0.0f;
+    for (int i = 0; i < size; i++)
+    {
+        for (int j = 0; j < size; j++)
+        {
+            int x = i - center;
+            int y = j - center;
+            float res = gauss(x, y, sigma);
+            kernel[i * size + j] = res;
+            sum += res;
+        }
+    }
+
+    for (int i = 0; i < size * size; i++)
+    {
+        kernel[i] /= sum;
+    }
+}
+
+void applykernel(Image &img, float *kernel, int ksize)
+{
+    int height = img.getHeight();
+    int width = img.getWidth();
+    float *data = img.getData();
+    int cnls = img.getChannels();
+    int work_cnls = cnls < 4 ? cnls : 3;
+    int offset = ksize / 2;
+    float *sumArr = new float[work_cnls];
+    memset(sumArr, 0.0f, work_cnls * sizeof(float));
+
+    for (int i = offset; i < height - offset; i++)
+    {
+        for (int j = offset; j < width - offset; j++)
+        {
+            for (int k = 0; k < ksize; k++)
+            {
+                int kRowIdx = k * ksize;
+                for (int l = 0; l < ksize; l++)
+                {
+                    int kIdx = (kRowIdx + l);
+                    int idx = ((i + k - offset) * width + (j + l - offset)) * cnls;
+                    float kk = kernel[kIdx];
+
+                    for (int m = 0; m < work_cnls; m++)
+                        sumArr[m] += data[idx + m] * kk;
+                }
+            }
+
+            int ii = (i * width + j) * cnls;
+            for (int m = 0; m < work_cnls; m++)
+                data[ii + m] = sumArr[m];
+
+            memset(sumArr, 0.0f, work_cnls * sizeof(float));
+        }
+    }
+
+    delete[] sumArr;
 }
 
 std::vector<float> ImageProcessor::getHistogram(const Image &img)
@@ -97,7 +167,7 @@ void ImageProcessor::rotateImage(Image &img, char x)
             int newRowPointer = i * width;
             for (int j = 0; j < width; j++)
             {
-                int pointerOld = (oldRowPointer + originalW- j -1) * cnls;
+                int pointerOld = (oldRowPointer + originalW - j - 1) * cnls;
                 int pointerNew = (newRowPointer + j) * cnls;
 
                 for (int k = 0; k < cnls; k++)
@@ -120,7 +190,7 @@ void ImageProcessor::mirror(Image &img, char x)
 
     if (x == 'x')
     {
-        for (int i = 0; i < height/2; i++)
+        for (int i = 0; i < height / 2; i++)
         {
             int pointerRA = i * width;
             int pointerRB = (height - i - 1) * width;
@@ -142,15 +212,15 @@ void ImageProcessor::mirror(Image &img, char x)
         for (int i = 0; i < height; i++)
         {
             int pointerRA = i * width;
-            int pointerRB = pointerRA + width; 
-            for (int j = 0; j < width/2; j++)
+            int pointerRB = pointerRA + width;
+            for (int j = 0; j < width / 2; j++)
             {
 
                 int pointerA = (pointerRA + j) * cnls;
                 int pointerB = (pointerRB + width - j - 1) * cnls;
                 for (int k = 0; k < cnls; k++)
                 {
-                    swap(data[pointerA + k], data[pointerB+k]);
+                    swap(data[pointerA + k], data[pointerB + k]);
                 }
             }
         }
@@ -315,7 +385,7 @@ void ImageProcessor::negativeImage(Image &image)
     int height = image.getHeight();
     int width = image.getWidth();
     int cnls = image.getChannels();
-    int work_cnls = image.getChannels() < 4?image.getChannels():3;
+    int work_cnls = image.getChannels() < 4 ? image.getChannels() : 3;
 
     for (int i = 0; i < height; i++)
     {
@@ -340,6 +410,72 @@ void ImageProcessor::mirrorX(Image &image)
 void ImageProcessor::mirrorY(Image &image)
 {
     mirror(image, 'y');
+}
+
+void ImageProcessor::medianFilter(Image &image, int sigma)
+{
+    if (sigma % 2 == 0)
+    {
+        sigma += 1;
+    }
+
+    int offset = sigma / 2;
+    int height = image.getHeight();
+    int width = image.getWidth();
+    float *data = image.getData();
+    int cnls = image.getChannels();
+    
+    int work_cnls = cnls < 4 ? cnls : 3;
+    std::vector<std::vector<float>> window(work_cnls, std::vector<float>());
+
+    for (int i = 0; i < work_cnls; i++)
+    {
+        window[i].reserve(sigma * sigma);
+    }
+
+    for (int i = offset; i < height - offset; i++)
+    {
+        for (int j = offset; j < width - offset; j++)
+        {
+            for (int ik = -offset; ik < offset + 1; ik++)
+            {
+                int rowPointer = (i + ik) * width;
+                for (int jk = -offset; jk < offset + 1; jk++)
+                {
+                    int pointer = (rowPointer + j + jk) * cnls;
+                    for (int m = 0; m < work_cnls; m++)
+                    {
+                        std::vector<float>* curr = &window[m];
+                        curr->push_back(data[pointer + m]);
+                    }
+                }
+            }
+
+            int pp = (i * width + j) * cnls;
+            for (int m = 0; m < work_cnls; m++)
+            {
+                std::vector<float>* curr = &window[m];
+                
+                sort(curr->begin(), curr->end());
+                
+                data[pp+m] = curr->at(curr->size() / 2);
+                curr->clear();
+            }
+        }
+    }
+}
+
+void ImageProcessor::gaussianSmoothing(Image &image, int sigma)
+{
+    int kernelSize = 6 * sigma + 1;
+
+    float *kernel = new float[kernelSize * kernelSize];
+
+    calculateKernel(kernel, kernelSize, sigma);
+
+    applykernel(image, kernel, kernelSize);
+
+    delete[] kernel;
 }
 
 void ImageProcessor::generateHistogram(const Image &image)

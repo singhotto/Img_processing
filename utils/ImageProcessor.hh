@@ -6,6 +6,8 @@
 #include <vector>
 #include <string>
 #include <stdexcept> 
+#include <cmath>
+#include <algorithm>
 
 class ImageProcessor
 {
@@ -38,6 +40,9 @@ public:
 
     void mirrorX(Image& image);
     void mirrorY(Image& image);
+
+    void medianFilter(Image& image, int sigma);
+    void gaussianSmoothing(Image& image, int sigma);
 
     //save historgram
     void generateHistogram(const Image& image);

@@ -5,13 +5,17 @@
 #include "utils/ImageProcessor.hh"
 
 int main(){
-    const std::string fileName = "cameraman.jpg";
-    // const std::string fileName = "big_color.png";
+    // const std::string fileName = "cameraman.jpg";
+    const std::string fileName = "lena_noisy.png";
+    // const std::string fileName = "bottels.png";
+    // const std::string fileName = "cnls4.jpg";
     ImageHandler& handler = ImageHandler::getInstance();
     ImageProcessor& processor = ImageProcessor::getInstance();
 
     //original Image
     Image img = handler.loadImage("../images/" + fileName);
+    
+    // Image newImg = img;
 
     //image to work
     // processor.rgb2Grayscale(img);
@@ -33,6 +37,8 @@ int main(){
     // processor.generateHistogram(img);
     // processor.generateHistogram(newImage);
 
+    processor.medianFilter(img, 5);
+    // processor.gaussianSmoothing(img, 3);
     
     //Saving Image
     handler.saveImage("../output/" + fileName, img);

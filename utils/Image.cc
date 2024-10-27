@@ -140,17 +140,6 @@ int Image::getDataSize() const
     return width * height * channels;
 }
 
-const float Image::operator()(int row, int col) const
-{
-    // Check bounds
-    if (row < 0 || row >= height || col < 0 || col >= width)
-    {
-        throw std::out_of_range("Index out of bounds");
-    }
-    // Calculate the index in the 1D vector
-    int pointer = (row * width + col) * channels; // Adjust based on the number of channels
-    return data[pointer]; 
-}
 float &Image::operator()(int row, int col)
 {
     // Check bounds
@@ -161,6 +150,18 @@ float &Image::operator()(int row, int col)
     // Calculate the index in the 1D vector
     int pointer = (row * width + col) * channels; // Adjust based on the number of channels
     return data[pointer]; 
+}
+bool Image::operator==(const Image &other) const
+{
+    if(other.width != width || other.height != height || other.channels != channels){
+        return false;
+    }
+    float* dd = other.getData();
+    for(int i = 0; i<getDataSize(); i++){
+        if(dd[i] != data[i])
+            return false;
+    }
+    return true;
 }
 // Method to clear the image data
 void Image::clear()

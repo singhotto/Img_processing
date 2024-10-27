@@ -50,8 +50,8 @@ public:
     std::string getName() const;
     int getDataSize() const;
 
-    const float operator()(int row, int col) const;
     float& operator()(int row, int col);
+    bool operator==(const Image& other) const;
     
     // Method to cfloate data
     void clear();
