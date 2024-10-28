@@ -2,6 +2,7 @@
 #define IMAGE_PROCESSOR_GUARD
 
 #include "Image.hh"
+#include "Pixel.hh"
 #include "ChartGenerator/Chart.hh"
 #include <vector>
 #include <string>
@@ -25,18 +26,24 @@ private:
     void rotateImage(Image& img, char x);
 
     void mirror(Image& img, char x);
+    void grayscale2color(Image& image, char x);
 public:
     // Static method to access the singleton instance
     static ImageProcessor& getInstance();
 
     void rgb2Grayscale(Image& image);
+    void grayscale2rgb(Image& image);
+    void grayscale2rgba(Image& image);
     void toBinary(Image& image, int threshold = 150);
+    void setIntensity(Image& image, const float intensity);
     void changeBrightness(Image& image, int threshold);
     void histEqualization(Image& image);
     
     void rotateLeft(Image& image);
     void rotateRight(Image& image);
     void rotateDown(Image& image);
+
+    Image cropImage(Image& image, int x, int y, int sizeX, int sizeY);
 
     void negativeImage(Image& image);
 

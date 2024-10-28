@@ -827,6 +827,7 @@ CMakeFiles/main.dir/main.cpp.o: \
   /Users/singhotto/Documents/ImgProcessing/img_processing/utils/../lib/stb_image.h \
   /Users/singhotto/Documents/ImgProcessing/img_processing/utils/../lib/stb_image_write.h \
   /Users/singhotto/Documents/ImgProcessing/img_processing/utils/ImageType.hh \
+  /Users/singhotto/Documents/ImgProcessing/img_processing/utils/Pixel.hh \
   /Users/singhotto/Documents/ImgProcessing/img_processing/utils/ImageHandler.hh \
   /Users/singhotto/Documents/ImgProcessing/img_processing/utils/ImageProcessor.hh \
   /Users/singhotto/Documents/ImgProcessing/img_processing/utils/ChartGenerator/Chart.hh \

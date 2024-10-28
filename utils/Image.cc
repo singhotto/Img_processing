@@ -140,17 +140,26 @@ int Image::getDataSize() const
     return width * height * channels;
 }
 
-float &Image::operator()(int row, int col)
-{
+
+Pixel Image::operator()(int row, int col){
+
     // Check bounds
     if (row < 0 || row >= height || col < 0 || col >= width)
     {
-        throw std::out_of_range("Index out of bounds");
+        throw std::out_of_range("Pixel Index out of bounds");
     }
     // Calculate the index in the 1D vector
     int pointer = (row * width + col) * channels; // Adjust based on the number of channels
-    return data[pointer]; 
+    
+    if(channels == 1){
+        return Pixel(&data[pointer]);
+    }else if(channels == 3){
+        return Pixel(&data[pointer], &data[pointer + 1], &data[pointer + 2]);
+    }
+    
+    return Pixel(&data[pointer], &data[pointer + 1], &data[pointer + 2], &data[pointer + 3]);
 }
+
 bool Image::operator==(const Image &other) const
 {
     if(other.width != width || other.height != height || other.channels != channels){

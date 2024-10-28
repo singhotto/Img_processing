@@ -44,6 +44,15 @@ ImageType getImageType(const std::string &fileName)
     }
 }
 
+std::string getFileName(const std::string& path) {
+    // Find the last '/' or '\\' in the path
+    std::size_t pos = path.find_last_of("/\\");
+    if (pos != std::string::npos) {
+        return path.substr(pos + 1); // Extract filename
+    }
+    return path; // If no slash found, the path is already the filename
+}
+
 unsigned char* loadTIFF(const char *filename, int &width, int &height, int &channels, int& bitPerChannel)
 {
     TIFF *tiff = TIFFOpen(filename, "r");
@@ -208,8 +217,7 @@ Image ImageHandler::loadImage(const std::string &filename)
 
     copy2float(data, size, fdata);
     delete[] data;
-
-    return Image(filename, fdata, width, height, channels, type, bitPerChannel);
+    return Image(getFileName(filename), fdata, width, height, channels, type, bitPerChannel);
 }
 
 // Save the Image object to a file

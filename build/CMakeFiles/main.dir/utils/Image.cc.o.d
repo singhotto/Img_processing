@@ -85,6 +85,7 @@ CMakeFiles/main.dir/utils/Image.cc.o: \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/sys/_types/_mode_t.h \
   /Users/singhotto/Documents/ImgProcessing/img_processing/utils/../lib/stb_image_write.h \
   /Users/singhotto/Documents/ImgProcessing/img_processing/utils/ImageType.hh \
+  /Users/singhotto/Documents/ImgProcessing/img_processing/utils/Pixel.hh \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/iostream \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__assert \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__verbose_abort \

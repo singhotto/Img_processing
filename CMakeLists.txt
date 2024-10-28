@@ -15,6 +15,7 @@ include_directories(
 set(SRCS
     main.cpp
     utils/Image.cc
+    utils/Pixel.cc
     utils/ImageHandler.cc
     utils/ImageProcessor.cc
     lib/stb_image.cc
@@ -25,6 +26,7 @@ set(SRCS
 # Header files (optional, for IDEs and documentation)
 set(HEADERS
     utils/Image.hh
+    utils/Pixel.hh
     utils/ImageHandler.hh
     utils/ImageProcessor.hh
     utils/ChartGenerator/BMPHeader.hh

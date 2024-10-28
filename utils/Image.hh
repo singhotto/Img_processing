@@ -5,6 +5,7 @@
 #include "../lib/stb_image_write.h"
 
 #include "ImageType.hh"
+#include "Pixel.hh"
 
 #include <iostream>
 #include <string>
@@ -50,7 +51,7 @@ public:
     std::string getName() const;
     int getDataSize() const;
 
-    float& operator()(int row, int col);
+    Pixel operator()(int row, int col);
     bool operator==(const Image& other) const;
     
     // Method to cfloate data

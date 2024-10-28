@@ -1352,7 +1352,8 @@ CMakeFiles/main.dir/main.cpp.o: /Users/singhotto/Documents/ImgProcessing/img_pro
   /Users/singhotto/Documents/ImgProcessing/img_processing/utils/Image.hh \
   /Users/singhotto/Documents/ImgProcessing/img_processing/utils/ImageHandler.hh \
   /Users/singhotto/Documents/ImgProcessing/img_processing/utils/ImageProcessor.hh \
-  /Users/singhotto/Documents/ImgProcessing/img_processing/utils/ImageType.hh
+  /Users/singhotto/Documents/ImgProcessing/img_processing/utils/ImageType.hh \
+  /Users/singhotto/Documents/ImgProcessing/img_processing/utils/Pixel.hh
 
 CMakeFiles/main.dir/utils/ChartGenerator/Chart.cc.o: /Users/singhotto/Documents/ImgProcessing/img_processing/utils/ChartGenerator/Chart.cc \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/Availability.h \
@@ -3055,7 +3056,8 @@ CMakeFiles/main.dir/utils/Image.cc.o: /Users/singhotto/Documents/ImgProcessing/i
   /Users/singhotto/Documents/ImgProcessing/img_processing/lib/stb_image.h \
   /Users/singhotto/Documents/ImgProcessing/img_processing/lib/stb_image_write.h \
   /Users/singhotto/Documents/ImgProcessing/img_processing/utils/Image.hh \
-  /Users/singhotto/Documents/ImgProcessing/img_processing/utils/ImageType.hh
+  /Users/singhotto/Documents/ImgProcessing/img_processing/utils/ImageType.hh \
+  /Users/singhotto/Documents/ImgProcessing/img_processing/utils/Pixel.hh
 
 CMakeFiles/main.dir/utils/ImageHandler.cc.o: /Users/singhotto/Documents/ImgProcessing/img_processing/utils/ImageHandler.cc \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/Availability.h \
@@ -3910,6 +3912,7 @@ CMakeFiles/main.dir/utils/ImageHandler.cc.o: /Users/singhotto/Documents/ImgProce
   /Users/singhotto/Documents/ImgProcessing/img_processing/utils/Image.hh \
   /Users/singhotto/Documents/ImgProcessing/img_processing/utils/ImageHandler.hh \
   /Users/singhotto/Documents/ImgProcessing/img_processing/utils/ImageType.hh \
+  /Users/singhotto/Documents/ImgProcessing/img_processing/utils/Pixel.hh \
   /opt/homebrew/include/tiff.h \
   /opt/homebrew/include/tiffconf.h \
   /opt/homebrew/include/tiffio.h \
@@ -4792,7 +4795,11 @@ CMakeFiles/main.dir/utils/ImageProcessor.cc.o: /Users/singhotto/Documents/ImgPro
   /Users/singhotto/Documents/ImgProcessing/img_processing/utils/ChartGenerator/Font.hh \
   /Users/singhotto/Documents/ImgProcessing/img_processing/utils/Image.hh \
   /Users/singhotto/Documents/ImgProcessing/img_processing/utils/ImageProcessor.hh \
-  /Users/singhotto/Documents/ImgProcessing/img_processing/utils/ImageType.hh
+  /Users/singhotto/Documents/ImgProcessing/img_processing/utils/ImageType.hh \
+  /Users/singhotto/Documents/ImgProcessing/img_processing/utils/Pixel.hh
+
+CMakeFiles/main.dir/utils/Pixel.cc.o: /Users/singhotto/Documents/ImgProcessing/img_processing/utils/Pixel.cc \
+  /Users/singhotto/Documents/ImgProcessing/img_processing/utils/Pixel.hh
 
 
 /opt/homebrew/include/tiffvers.h:
@@ -5413,6 +5420,8 @@ CMakeFiles/main.dir/utils/ImageProcessor.cc.o: /Users/singhotto/Documents/ImgPro
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__bit/bit_width.h:
 
+/Users/singhotto/Documents/ImgProcessing/img_processing/utils/Pixel.cc:
+
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__atomic/atomic_lock_free.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__atomic/atomic_flag.h:
@@ -6030,6 +6039,8 @@ CMakeFiles/main.dir/utils/ImageProcessor.cc.o: /Users/singhotto/Documents/ImgPro
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__filesystem/file_status.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__type_traits/invoke.h:
+
+/Users/singhotto/Documents/ImgProcessing/img_processing/utils/Pixel.hh:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/machine/_types.h:
 

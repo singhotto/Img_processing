@@ -297,6 +297,30 @@ utils/ImageProcessor.cc.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/utils/ImageProcessor.cc.s
 .PHONY : utils/ImageProcessor.cc.s
 
+utils/Pixel.o: utils/Pixel.cc.o
+.PHONY : utils/Pixel.o
+
+# target to build an object file
+utils/Pixel.cc.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/utils/Pixel.cc.o
+.PHONY : utils/Pixel.cc.o
+
+utils/Pixel.i: utils/Pixel.cc.i
+.PHONY : utils/Pixel.i
+
+# target to preprocess a source file
+utils/Pixel.cc.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/utils/Pixel.cc.i
+.PHONY : utils/Pixel.cc.i
+
+utils/Pixel.s: utils/Pixel.cc.s
+.PHONY : utils/Pixel.s
+
+# target to generate assembly for a file
+utils/Pixel.cc.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/utils/Pixel.cc.s
+.PHONY : utils/Pixel.cc.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -327,6 +351,9 @@ help:
 	@echo "... utils/ImageProcessor.o"
 	@echo "... utils/ImageProcessor.i"
 	@echo "... utils/ImageProcessor.s"
+	@echo "... utils/Pixel.o"
+	@echo "... utils/Pixel.i"
+	@echo "... utils/Pixel.s"
 .PHONY : help
 
 
