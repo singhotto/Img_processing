@@ -49,7 +49,7 @@ public:
 
     Image cropImage(Image& image, int x, int y, int sizeX, int sizeY);
 
-    Image overlayImage(Image& a, Image& b, int row = 0, int col = 0);
+    Image overlayImage(Image a, Image b, int row = 0, int col = 0);
 
     void negativeImage(Image& image);
 

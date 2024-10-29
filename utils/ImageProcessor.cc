@@ -240,10 +240,7 @@ void ImageProcessor::grayscale2color(Image &image, char x)
         cnls = 4;
 
     if (imgCnls == cnls)
-    {
-        std::cout << "It's already color image!!!\n";
         return;
-    }
 
     std::string name = image.getName();
     ImageType imageType = image.getType();
@@ -346,7 +343,7 @@ void ImageProcessor::toBinary(Image &image, int threshold)
 void ImageProcessor::setIntensity(Image &image, const float intensity)
 {
     if (image.getChannels() != 4)
-        throw std::runtime_error("It's a four channel image!!!");
+        throw std::runtime_error("It's not a four channel image!!!");
 
     for (int i = 0; i < image.getHeight(); i++)
     {
@@ -439,13 +436,42 @@ Image ImageProcessor::cropImage(Image &image, int x, int y, int sizeX, int sizeY
     return newImage;
 }
 
-Image ImageProcessor::overlayImage(Image &a, Image &b, int row, int col)
+Image ImageProcessor::overlayImage(Image background, Image foreground, int row, int col)
 {
-    Image newImage = a;
+    int bh = background.getHeight();
+    int bw = background.getWidth();
+    int fh = foreground.getHeight();
+    int fw = foreground.getWidth();
 
+    if(row > bh || col > bw)
+        throw std::runtime_error("out of bounds!!!");
 
+    conv2rgba(background);
+    conv2rgba(foreground);
 
-    return Image();
+    int endBH = min(bh - row, fh);
+    int endBW = min(bw - col, fw);
+    float alphaB, alphaF;
+    float r, g, b, a;
+
+    for(int i = row; i<endBH+row; i++){
+        for(int j = col; j<endBW+col; j++){
+            Pixel pb = background(i, j);
+            Pixel pf = foreground(i-row, j-col);
+
+            alphaB = pb.getA()/255.0f;
+            alphaF = pf.getA()/255.0f;
+
+            r = pf.getR() * alphaF + (1.0f - alphaF) * alphaB * pb.getR();
+            g = pf.getG() * alphaF + (1.0f - alphaF) * alphaB * pb.getG();
+            b = pf.getB() * alphaF + (1.0f - alphaF) * alphaB * pb.getB();
+            a = alphaF + (1.0f - alphaF) * alphaB;
+            pb.setRGB(r/a, g/a, b/a, a * 255.0f);
+        }
+    }
+    
+
+    return background;
 }
 
 void ImageProcessor::negativeImage(Image &image)
