@@ -31,9 +31,10 @@ public:
     // Static method to access the singleton instance
     static ImageProcessor& getInstance();
 
-    void rgb2Grayscale(Image& image);
-    void grayscale2rgb(Image& image);
-    void grayscale2rgba(Image& image);
+    void conv2Grayscale(Image& image);
+    void conv2rgb(Image& image);
+    void conv2rgba(Image& image);
+
     void toBinary(Image& image, int threshold = 150);
     void setIntensity(Image& image, const float intensity);
     void changeBrightness(Image& image, int threshold);
@@ -43,12 +44,14 @@ public:
     void rotateRight(Image& image);
     void rotateDown(Image& image);
 
-    Image cropImage(Image& image, int x, int y, int sizeX, int sizeY);
-
-    void negativeImage(Image& image);
-
     void mirrorX(Image& image);
     void mirrorY(Image& image);
+
+    Image cropImage(Image& image, int x, int y, int sizeX, int sizeY);
+
+    Image overlayImage(Image& a, Image& b, int row = 0, int col = 0);
+
+    void negativeImage(Image& image);
 
     void medianFilter(Image& image, int sigma);
     void gaussianSmoothing(Image& image, int sigma);

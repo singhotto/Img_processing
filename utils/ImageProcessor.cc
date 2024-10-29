@@ -233,11 +233,13 @@ void ImageProcessor::grayscale2color(Image &image, char x)
     int cnls = 3;
     int height = image.getHeight();
     int width = image.getWidth();
+    float v1, v2, v3;
+    int imgCnls = image.getChannels();
 
     if (x == 'a')
         cnls = 4;
 
-    if (image.getChannels() == cnls)
+    if (imgCnls == cnls)
     {
         std::cout << "It's already color image!!!\n";
         return;
@@ -258,15 +260,19 @@ void ImageProcessor::grayscale2color(Image &image, char x)
         for (int j = 0; j < width; j++)
         {
             Pixel p = image(i, j);
-            float v = p.getR();
+            v1 = p.getR();
+            if(imgCnls >= 3){
+                v2 = p.getG();
+                v3 = p.getB();
+            }
             Pixel np = newImage(i, j);
             if (cnls == 3)
             {
-                np.setRGB(v, v, v);
+                np.setRGB(v1, v2, v3);
             }
             else
             {
-                np.setRGB(v, v, v, 255.0f);
+                np.setRGB(v1, v2, v3, 255.0f);
             }
         }
     }
@@ -282,7 +288,7 @@ ImageProcessor &ImageProcessor::getInstance()
     return instance;
 }
 
-void ImageProcessor::rgb2Grayscale(Image &image)
+void ImageProcessor::conv2Grayscale(Image &image)
 {
     if (image.getChannels() < 3)
     {
@@ -303,12 +309,12 @@ void ImageProcessor::rgb2Grayscale(Image &image)
     }
 }
 
-void ImageProcessor::grayscale2rgb(Image &image)
+void ImageProcessor::conv2rgb(Image &image)
 {
     grayscale2color(image, 'c');
 }
 
-void ImageProcessor::grayscale2rgba(Image &image)
+void ImageProcessor::conv2rgba(Image &image)
 {
     grayscale2color(image, 'a');
 }
@@ -431,6 +437,15 @@ Image ImageProcessor::cropImage(Image &image, int x, int y, int sizeX, int sizeY
     }
 
     return newImage;
+}
+
+Image ImageProcessor::overlayImage(Image &a, Image &b, int row, int col)
+{
+    Image newImage = a;
+
+
+
+    return Image();
 }
 
 void ImageProcessor::negativeImage(Image &image)

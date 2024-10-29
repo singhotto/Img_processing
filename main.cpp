@@ -5,12 +5,12 @@
 #include "utils/ImageProcessor.hh"
 
 int main(){
-    const std::string fileName = "enea.png";
+    // const std::string fileName = "enea.png";
     // const std::string fileName = "zaffanella.png";
     // const std::string fileName = "2nd-from-top-USA.tiff";
     // const std::string fileName = "cameraman.jpg";
     // const std::string fileName = "lena_noisy.png";
-    // const std::string fileName = "bottels.png";
+    const std::string fileName = "bottels.png";
     // const std::string fileName = "cnls4.jpg";
 
     ImageHandler& handler = ImageHandler::getInstance();
@@ -21,8 +21,9 @@ int main(){
     
     // Image newImg = img;
 
-    // processor.rgb2Grayscale(img);
-    // processor.grayscale2rgba(img);
+    // processor.conv2Grayscale(img);
+    // processor.conv2rgb(img);
+    // processor.conv2rgba(img);
     // processor.toBinary(img);
     // processor.changeBrightness(img, 100);
     // processor.setIntensity(img, 150.0f);
@@ -32,7 +33,7 @@ int main(){
     // processor.rotateRight(img);
     // processor.rotateDown(img);
 
-    Image newImg = processor.cropImage(img, 50, 50, 50, 50);
+    // Image newImg = processor.cropImage(img, 50, 50, 50, 50);
 
     // processor.mirrorX(img);
     // processor.mirrorY(img);
@@ -46,10 +47,11 @@ int main(){
     
     // processor.addSaltPepper(img, 0.1f);
 
-    newImg.displayInfo();
+    img.displayInfo();
+    
     //Saving Image
-    handler.saveImage("../output/"+ newImg.getName(), newImg);
-    // handler.saveImage("../output/"+ img.getName(), img);
+    // handler.saveImage("../output/"+ newImg.getName(), newImg);
+    handler.saveImage("../output/"+ img.getName(), img);
 
     return 0;
 }
